@@ -1,8 +1,8 @@
-import { EmployeesRepository } from "../repositories/EmployeesRepository";
+import { EmployeesRepository } from "../../repositories/implementations/EmployeesRepository";
 import {
   ICreateEmployeeDTO,
   IEmployeesRepository,
-} from "../repositories/IEmployeesRepository";
+} from "../../repositories/IEmployeesRepository";
 
 interface IRequest {
   Name: string;
@@ -10,17 +10,17 @@ interface IRequest {
   Position: string;
 }
 
-class CreateEmployeeService {
+class CreateEmployeeUseCase {
   constructor(private employeesRepository: IEmployeesRepository) {}
 
   execute({ Name, Age, Position }: IRequest): void {
     const employeeAlreadExists = this.employeesRepository.findByName(Name);
 
     if (employeeAlreadExists) {
-      throw new Error("Employee is already registered!");
+      throw new Error("Employee is already registered");
     }
     this.employeesRepository.create({ Name, Age, Position });
   }
 }
 
-export { CreateEmployeeService };
+export { CreateEmployeeUseCase };

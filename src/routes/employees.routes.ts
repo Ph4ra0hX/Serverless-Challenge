@@ -1,28 +1,16 @@
-import { Request, response, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 
-import { EmployeesRepository } from "../repositories/employeesRepository";
+import { createEmployeeController } from "../modules/employees/useCases/createEmployee";
+import { listEmployeeController } from "../modules/employees/useCases/listEmployees";
 
 const employeesRouter = Router();
 
-const employeesRepository = new EmployeesRepository();
-
 employeesRouter.post("/", (req: Request, res: Response) => {
-  const { Name, Age, Position } = req.body;
-
-  const employeeAlreadExists = employeesRepository.findByName(Name);
-
-  if (employeeAlreadExists) {
-    return res.status(400).json({ error: "Employee is already registered" });
-  }
-  employeesRepository.create({ Name, Age, Position });
-
-  return res.status(201).send();
+  return createEmployeeController.handle(req, res);
 });
 
 employeesRouter.get("/", (req: Request, res: Response) => {
-  const all = employeesRepository.list();
-
-  return res.json(all);
+  return listEmployeeController.handle(req, res);
 });
 
 export { employeesRouter };

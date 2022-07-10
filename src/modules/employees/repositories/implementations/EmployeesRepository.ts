@@ -1,8 +1,8 @@
-import { Employee } from "../model/Employee";
+import { Employee } from "../../model/Employee";
 import {
   ICreateEmployeeDTO,
   IEmployeesRepository,
-} from "./IEmployeesRepository";
+} from "../IEmployeesRepository";
 
 class EmployeesRepository implements IEmployeesRepository {
   private employees: Employee[];
