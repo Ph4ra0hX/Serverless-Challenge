@@ -1,12 +1,10 @@
 import { Employee } from "../model/Employee";
+import {
+  ICreateEmployeeDTO,
+  IEmployeesRepository,
+} from "./IEmployeesRepository";
 
-interface ICreateEmployeeDTO {
-  Name: string;
-  Age: number;
-  Position: string;
-}
-
-class EmployeesRepository {
+class EmployeesRepository implements IEmployeesRepository {
   private employees: Employee[];
 
   constructor() {
