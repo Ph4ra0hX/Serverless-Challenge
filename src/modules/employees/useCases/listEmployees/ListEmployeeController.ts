@@ -8,7 +8,6 @@ class ListEmployeeController {
   async handle(req: Request, res: Response): Promise<Response> {
     const all = await this.listEmployeesUseCase.execute();
 
-    console.log(all);
     return res.json(all);
   }
 }

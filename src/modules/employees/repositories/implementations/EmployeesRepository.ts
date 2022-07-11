@@ -4,7 +4,6 @@ import {
 } from "../IEmployeesRepository";
 
 import { v4 as uuidv4 } from "uuid";
-import { Console } from "console";
 
 const Employee = require("../../../../database/model/Employee");
 
@@ -34,6 +33,11 @@ class EmployeesRepository implements IEmployeesRepository {
     const employee = await Employee.findAll({ raw: true });
 
     return employee;
+  }
+
+  remove(Id) {
+    console.log(Id);
+    const employee = Employee.destroy({ where: { id: Id } });
   }
 }
 

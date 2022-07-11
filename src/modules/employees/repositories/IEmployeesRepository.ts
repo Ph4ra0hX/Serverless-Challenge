@@ -9,6 +9,7 @@ interface ICreateEmployeeDTO {
 interface IEmployeesRepository {
   list(): EmployeeCrud[];
   create({ Name, Age, Position }: ICreateEmployeeDTO);
+  revove(id);
 }
 
 export { IEmployeesRepository, ICreateEmployeeDTO };

@@ -75,6 +75,39 @@
             }
           }
         }
+      },
+
+      "delete": {
+        "tags": ["Employees"],
+        "summary": "Delete employee by id",
+        "description": "Delete employee by id",
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Age": {
+                        "type": "number"
+                      },
+                      "Name": {
+                        "type": "string"
+                      },
+                      "Position": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
