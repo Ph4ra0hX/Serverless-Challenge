@@ -1,11 +1,26 @@
-import { Console } from "console";
 import express from "express";
 import { router } from "./routes";
-import { employeesRouter } from "./routes/employees.routes";
+
+import swaggerUI from "swagger-ui-express";
+
+import swaggerFile from "./swagger.json";
+
+const connection = require("./database");
+
+connection
+  .authenticate()
+  .then(() => {
+    console.log("Database successfully connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const app = express();
 
 app.use(express.json());
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.use(router);
 

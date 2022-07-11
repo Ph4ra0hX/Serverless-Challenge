@@ -1,4 +1,4 @@
-import { Employee } from "../model/Employee";
+import { EmployeeCrud } from "../../../database/entity/employee";
 
 interface ICreateEmployeeDTO {
   Name: string;
@@ -7,8 +7,7 @@ interface ICreateEmployeeDTO {
 }
 
 interface IEmployeesRepository {
-  findByName(Name: string): Employee;
-  list(): Employee[];
+  list(): EmployeeCrud[];
   create({ Name, Age, Position }: ICreateEmployeeDTO);
 }
 

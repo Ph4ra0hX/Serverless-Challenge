@@ -1,34 +1,37 @@
-import { Employee } from "../../model/Employee";
 import {
   ICreateEmployeeDTO,
   IEmployeesRepository,
 } from "../IEmployeesRepository";
 
-class EmployeesRepository implements IEmployeesRepository {
-  private employees: Employee[];
+import { v4 as uuidv4 } from "uuid";
+import { Console } from "console";
 
-  constructor() {
-    this.employees = [];
+const Employee = require("../../../../database/model/Employee");
+
+import EmployeeCrud = require("../../../../database/entity/employee");
+
+class EmployeesRepository implements IEmployeesRepository {
+  public static INSTANCE: EmployeesRepository;
+
+  public static getInstance(): EmployeesRepository {
+    if (!EmployeesRepository.INSTANCE) {
+      EmployeesRepository.INSTANCE = new EmployeesRepository();
+    }
+
+    return EmployeesRepository.INSTANCE;
   }
 
   create({ Name, Age, Position }: ICreateEmployeeDTO): void {
-    const employee = new Employee();
-
-    Object.assign(employee, {
-      Name,
-      Age,
-      Position,
+    Employee.create({
+      id: uuidv4(),
+      Age: Age,
+      Name: Name,
+      Position: Position,
     });
-
-    this.employees.push(employee);
   }
 
-  list(): Employee[] {
-    return this.employees;
-  }
-
-  findByName(Name: string): Employee {
-    const employee = this.employees.find((employee) => employee.Name === Name);
+  async list() {
+    const employee = await Employee.findAll({ raw: true });
 
     return employee;
   }

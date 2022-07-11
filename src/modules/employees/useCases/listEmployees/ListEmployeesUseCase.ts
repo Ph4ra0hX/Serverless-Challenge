@@ -1,10 +1,9 @@
-import { Employee } from "../../model/Employee";
 import { IEmployeesRepository } from "../../repositories/IEmployeesRepository";
 
 class ListEmployeesUseCase {
-  constructor(private employeeRepository: IEmployeesRepository) {}
+  constructor(public employeeRepository: IEmployeesRepository) {}
 
-  execute(): Employee[] {
+  execute() {
     const employees = this.employeeRepository.list();
 
     return employees;
